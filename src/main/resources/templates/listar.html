@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+</head>
+<body>
+<h1 th:text="${titulo}"></h1>
+
+<table class="table table-striped table-bordered">
+	<thead class="thead-dark">
+		<tr>
+			<th> ID</th>
+			<th>Nombre </th>
+			<th>Precio</th>
+			<th>Fecha</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each= "producto: ${productos}">
+			<td th:text="${producto.id}"></td>
+			<td th:text="${producto.nombre}"></td>
+			<td th:text="${producto.precio}"></td>
+			<td th:text="${producto.createAt}"></td>
+		</tr>
+	</tbody>
+</table>	 
+</body>
+</html>

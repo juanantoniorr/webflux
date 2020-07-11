@@ -31,7 +31,15 @@ public class SpringBootWebfluxApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		mongoTemplate.dropCollection("productos").subscribe();
 		Flux.just(new Producto("TV plasma", 10000.00),
-				new Producto("Playstation 5", 20000.00),
+				new Producto("galaxy s20", 28000.00),
+				new Producto("reloj", 10000.00),
+				new Producto("Monitor", 5000.00),
+				new Producto("Escritorio", 22000.00),
+				new Producto("teclado", 1000.00),
+				new Producto("laptop", 20000.00),
+				new Producto("computadora", 20000.00),
+				new Producto("refri", 20000.00),
+				new Producto("ice-maker", 20000.00),
 				new Producto("mouse", 350.00))
 		////Cuando hay mas de una linea se utiliza el return
 		.flatMap(producto -> {

@@ -54,4 +54,38 @@ public class ProductoController {
 		return "listar";
 		
 	}
+	
+	@GetMapping({"/listar-full"}) //lleva llaves si esta mapeada a 2 vistas
+	public String listarFull (Model model) {
+		Flux<Producto> productos = productoDao.findAll()
+				.map(producto -> {
+					producto.setNombre(producto.getNombre().toUpperCase());
+					return producto;
+				})
+				.repeat(5000);
+		productos.subscribe(prod -> logger.info(prod.getNombre()));
+		//Aqui no se pone el subscribe porque va en automatico en thymeleaf
+		//Se va a agregar un buffer para ir mostrando en bloques articulos
+		model.addAttribute("productos", productos);
+		model.addAttribute("titulo", "Listado de productos");
+		return "listar";
+		
+	}
+	
+	@GetMapping({"/listar-chunked"}) //lleva llaves si esta mapeada a 2 vistas
+	public String listarChunked (Model model) {
+		Flux<Producto> productos = productoDao.findAll()
+				.map(producto -> {
+					producto.setNombre(producto.getNombre().toUpperCase());
+					return producto;
+				})
+				.repeat(5000);
+		productos.subscribe(prod -> logger.info(prod.getNombre()));
+		//Aqui no se pone el subscribe porque va en automatico en thymeleaf
+		//Se va a agregar un buffer para ir mostrando en bloques articulos
+		model.addAttribute("productos", productos);
+		model.addAttribute("titulo", "Listado de productos");
+		return "listar-chunked";
+		
+	}
 }
